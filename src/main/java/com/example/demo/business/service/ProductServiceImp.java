@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,29 +17,23 @@ public class ProductServiceImp implements ProductService {
 
     @Transactional(readOnly = true)
     public List<ProductDto> listAll() {
-        List<ProductDto> productsDto = new ArrayList<ProductDto>();
-        List<Product> products = productRepository.findAll();
-        for (Product product : products) {
-            productsDto.add(toDto(product));
-        }
-        return productsDto;
+
+        return productRepository.findAll().stream()
+                .map(this::toDto).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ProductDto> listCategory(long departmentId) {
-        List<ProductDto> productsDto = new ArrayList<ProductDto>();
-        Iterable<Product> products = productRepository.findProductsOfDepartment(departmentId);
-        for (Product product : products) {
-            productsDto.add(toDto(product));
-        }
-        return productsDto;
 
+        return productRepository.findProductsOfDepartment(departmentId).stream()
+                .map(this::toDto).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ProductDto listProduct(long productId) {
-        Optional<Product> optional = productRepository.findById(productId);
-        return toDto(optional.get());
+
+        return productRepository.findById(productId).map(this::toDto)
+                .orElseThrow();
     }
 
     public ProductDto toDto(Product product) {
