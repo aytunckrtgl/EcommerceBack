@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddressDto {
-
+    private long addressId;
     private String AddressLine;
-    private LocalUser user;
+
 }

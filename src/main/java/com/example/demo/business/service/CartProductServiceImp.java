@@ -34,10 +34,6 @@ public class CartProductServiceImp implements CartProductService {
         cartProduct.setSalesQuantity(1);
         cartProduct.setCart(cart);
         cartProductRepository.save(cartProduct);
-
-        // TODO
-        //cart.getCartProductList().add(cartProduct);
-        //cartRepository.save(cart);
     }
 
     @Transactional
@@ -53,10 +49,6 @@ public class CartProductServiceImp implements CartProductService {
         cartProduct.setSalesQuantity(cartProduct.getSalesQuantity() + 1);
         cartProduct.setCart(cart);
         cartProductRepository.save(cartProduct);
-
-        // TODO
-        //cart.getCartProductList().add(cartProduct);
-        //cartRepository.save(cart);
     }
 
     @Transactional
@@ -72,10 +64,6 @@ public class CartProductServiceImp implements CartProductService {
         cartProduct.setProduct(product);
         cartProduct.setSalesQuantity(cartProduct.getSalesQuantity() - 1);
         cartProductRepository.save(cartProduct);
-
-        // TODO
-        // cart.getCartProductList().add(cartProduct);
-        // cartRepository.save(cart);
     }
 
     @Transactional
@@ -86,5 +74,15 @@ public class CartProductServiceImp implements CartProductService {
     @Transactional
     public List<CartProduct> listCart(long cartId) {
         return cartProductRepository.findByCartId(cartId);
+    }
+    @Transactional
+    public void deleteCart(long cartId){
+        List<CartProduct> list1 = listCart(cartId);
+        for(CartProduct cartProduct : list1){
+            cartProductRepository.delete(cartProduct);
+
+        }
+
+
     }
 }

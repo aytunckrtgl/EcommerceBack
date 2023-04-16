@@ -1,5 +1,6 @@
 package com.example.demo.business.service;
 
+import com.example.demo.business.dto.AddressDto;
 import com.example.demo.model.entity.Address;
 import com.example.demo.model.entity.LocalUser;
 import com.example.demo.model.repository.AddressRepository;
@@ -8,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,5 +35,19 @@ public class AdressServiceImp implements AdressService {
         Address address = addressRepository.findById(addressId)
                 .orElseThrow();
         addressRepository.delete(address);
+    }
+
+    @Transactional
+    public List<AddressDto> showAddresses(long userId){
+     List<Address> addressList =  addressRepository.findAllAddresses(userId);
+     List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
+     for(Address address : addressList){
+         AddressDto addressDto = new AddressDto();
+         addressDto.setAddressId(address.getId());
+
+         addressDto.setAddressLine(address.getAddressLine());
+         addressDtoList.add(addressDto);
+     }
+        return addressDtoList;
     }
 }

@@ -26,8 +26,6 @@ public class UserController {
 
     @PostMapping("/add")
     public long addUser(@RequestBody UserDto userDto) {
-        //TODO PASSWORDUDA KONTROL ET
-        //TODO KULLANICI ADI ALINMIŞSA UYARI VERSİN
         if (userDto.getUsername() == null) {
             throw new IllegalArgumentException("Username cannot be null");
         }

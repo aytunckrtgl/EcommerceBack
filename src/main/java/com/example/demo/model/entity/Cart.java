@@ -26,7 +26,5 @@ public class Cart {
     private LocalUser user;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<CartProduct> cartProductList = new ArrayList<CartProduct>();
-
-    //TODO CARDSTATUS ENUM
+    private List<CartProduct> cartProductList = new ArrayList<>();
 }

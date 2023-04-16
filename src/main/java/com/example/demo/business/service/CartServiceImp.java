@@ -37,8 +37,6 @@ public class CartServiceImp implements CartService {
 
     @Override
     public String checkOut() {
-        //TODO BURAYİ UNUTMA
-        //TODO CARTI SIFIRLA, İLERİDE ORDERLERİ DE KAYDEDİP GÖSTEREBİLİRSİN.
         return "Satın Alım Başarılı";
     }
 }

@@ -12,4 +12,5 @@ public interface CartProductService {
     void deleteOneProductCart(long productId, long cartId, CartProduct cartProduct);
     List<CartProduct> listCart(long cartId);
 
+    void deleteCart(long cartId);
 }

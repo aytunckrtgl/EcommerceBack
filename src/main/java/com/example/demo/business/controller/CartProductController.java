@@ -24,4 +24,10 @@ public class CartProductController {
                 .map(cartProduct -> new CartProductDto(cartProduct.getProduct(), cartProduct.getSalesQuantity()))
                 .toList();
     }
+
+    @DeleteMapping("/{cartId}/delete")
+    public void deleteCart(@PathVariable("cartId") long cartId) {
+       cartProductService.deleteCart(cartId);
+
+    }
 }

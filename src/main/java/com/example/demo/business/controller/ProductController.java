@@ -13,7 +13,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-    //TODO PRODUCT ID YOKSA
     @GetMapping("/{productId}")
     public ProductDto listOneProduct(@PathVariable("productId") long productId) {
         return productService.listProduct(productId);

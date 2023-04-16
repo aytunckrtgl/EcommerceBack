@@ -21,11 +21,9 @@ public class LocalUser implements UserDetails {
     @Column(name = "id", nullable = true)
     private Long id;
 
-    //TODO UNİQ OLMADI ONU HALLET
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    //TODO ZAMAN KALIRSA ENCRYPTLE
     @Column(name = "password", nullable = true)
     private String password;
 

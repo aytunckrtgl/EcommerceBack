@@ -20,7 +20,6 @@ public class UserServiceImp implements UserService {
 
     @Transactional
     public void change(UserDto userDto, long userId) {
-        //TODO MAİL FALANDA DEGİSEBİLİR ONLARI DA YAP
         LocalUser user = localUserRepository.findById(userId)
                 .orElseThrow();
 
@@ -32,7 +31,6 @@ public class UserServiceImp implements UserService {
     public void delete(long userId) {
         LocalUser user = localUserRepository.findById(userId)
                 .orElseThrow();
-        //TODO BURAYA EGER BULAMAZSA OPSİYONUNU EKLE TRY CATCH!
         localUserRepository.delete(user);
     }
 
