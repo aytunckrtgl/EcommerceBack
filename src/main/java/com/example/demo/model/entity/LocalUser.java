@@ -1,6 +1,8 @@
 package com.example.demo.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,25 +12,25 @@ import java.util.List;
 
 @Entity
 @Table(name = "local_user")
+@Getter
+@Setter
 public class LocalUser implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id" , nullable = true)
+    @Column(name = "id", nullable = true)
     private Long id;
 
     //TODO UNİQ OLMADI ONU HALLET
-    @Column(name = "username" , nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     //TODO ZAMAN KALIRSA ENCRYPTLE
-    @Column(name = "password" , nullable = true)
+    @Column(name = "password", nullable = true)
     private String password;
 
-
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.REMOVE , orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
-
-
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id")
@@ -39,34 +41,6 @@ public class LocalUser implements UserDetails {
         if (cart == null) {
             cart = new Cart();
         }
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -98,11 +72,4 @@ public class LocalUser implements UserDetails {
         return null;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
